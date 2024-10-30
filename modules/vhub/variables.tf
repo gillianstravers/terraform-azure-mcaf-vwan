@@ -1,5 +1,5 @@
 variable "virtual_hubs" {
-  type = map(object({
+  type = object({
     name                     = string
     location                 = string
     address_prefix           = string
@@ -7,10 +7,13 @@ variable "virtual_hubs" {
     firewall_sku_tier        = string
     firewall_public_ip_count = number
     deploy_extended_vnet     = bool
-    rg_name                  = string
-  }))
+  })
 }
 
 variable "virtual_wan_id" {
+  type = string
+}
+
+variable "resource_group_name" {
   type = string
 }

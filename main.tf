@@ -10,7 +10,9 @@ resource "azurerm_virtual_wan" "this" {
 }
 
 module "vhub" {
-  source         = "./modules/vhub"
-  virtual_hubs   = var.virtual_hubs
-  virtual_wan_id = azurerm_virtual_wan.this.id
+  for_each            = var.virtual_hubs
+  source              = "./modules/vhub"
+  virtual_hubs        = var.virtual_hubs[each.key]
+  virtual_wan_id      = azurerm_virtual_wan.this.id
+  resource_group_name = azurerm_resource_group.this.name
 }
